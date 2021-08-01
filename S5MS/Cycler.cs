@@ -27,27 +27,28 @@ namespace S5MS
 
 			ConsoleHelper.WriteLine("   - Designed to abuse Steam Family Sharing offline mode -", ConsoleColor.DarkMagenta);
 
+			ConsoleHelper.WriteNewLine();
+
 			if (string.IsNullOrWhiteSpace(SteamHelper.CurrentSteamExecutablePath))
 			{
-				ConsoleHelper.WriteLine("* Error: could not find Steam executable.", ConsoleColor.Red);
+				ConsoleHelper.WriteLine("* Error: Could not find Steam executable.", ConsoleColor.Red);
 				ConsoleHelper.CloseApplication();
 			}
 
 			if (FirewallHelper.CurrentFirewallPolicy == null)
 			{
-				ConsoleHelper.WriteLine("* Error: failed to get firewall policy.", ConsoleColor.Red);
+				ConsoleHelper.WriteLine("* Error: Failed to get Firewall policy.", ConsoleColor.Red);
 				ConsoleHelper.CloseApplication();
 			}
 
 			if (FirewallHelper.CurrentFirewallOutRule == null || FirewallHelper.CurrentFirewallInRule == null)
 			{
-				ConsoleHelper.WriteLine("* Error: failed to generate firewall rule.", ConsoleColor.Red);
+				ConsoleHelper.WriteLine("* Error: Failed to generate Firewall rules.", ConsoleColor.Red);
 				ConsoleHelper.CloseApplication();
 			}
 
 			if (WorkMode == Mode.None)
 			{
-				ConsoleHelper.WriteNewLine();
 				ConsoleHelper.WriteLine("* Select work mode:", ConsoleColor.DarkYellow);
 
 				ConsoleHelper.WriteNewLine();
@@ -94,10 +95,12 @@ namespace S5MS
 						((float)Math.Round((float)TimeInMillisecondsToUnblock / 1000, 1)) != 1 ? "s" : string.Empty), ConsoleColor.DarkYellow);
 					break;
 			}
-			ConsoleHelper.Write("* This requires Steam to be launched with ", ConsoleColor.DarkYellow);
+			ConsoleHelper.Write("* It is recommended to launch Steam with ", ConsoleColor.DarkYellow);
 			ConsoleHelper.Write("-tcp", ConsoleColor.Yellow);
 			ConsoleHelper.Write(" parameter.", ConsoleColor.DarkYellow);
 			ConsoleHelper.WriteNewLine(2);
+			ConsoleHelper.WriteLine("* Warning: The program will overwrite your current Steam status and can put you out of being Invisible.", ConsoleColor.DarkYellow);
+			ConsoleHelper.WriteNewLine();
 			ConsoleHelper.WriteLine("  Press any key to start.", ConsoleColor.DarkCyan);
 
 			Console.ReadKey(true);
